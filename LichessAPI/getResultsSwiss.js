@@ -65,5 +65,3 @@ async function getResultsSwiss(tournamentID, max) {
 }
 
 module.exports = { getResultsSwiss };
-
-get;

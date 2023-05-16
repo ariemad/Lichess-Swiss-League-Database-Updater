@@ -1,6 +1,6 @@
 let options = {
-  scriptInterval: 120000,
   teamName: "chess-swiss-league",
+  tournamentsToCheck: 999999,
 };
 
 module.exports = { options };

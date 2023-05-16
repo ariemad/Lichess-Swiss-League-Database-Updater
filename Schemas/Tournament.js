@@ -26,6 +26,7 @@ const tournament = new Schema({
     whiteWins: Number,
   },
   rated: Boolean,
+  results: Array,
 });
 
 const Tournament = mongoose.model("Tournament", tournament);
