@@ -3,32 +3,32 @@ const { Tournament } = require("../Schemas/Tournament");
 const { options } = require("../options");
 
 async function resultsUpdate() {
-  //Get last tournaments from DB
+  //Get tournaments that have { resultsUpdate: false }
 
-  let recentTournaments = await Tournament.find({})
-    .sort({ startsAt: -1 })
-    .limit(options.tournamentsToCheck);
+  let toBeUpdated = await Tournament.find({ resultsUpdate: false });
 
   //Filter tournaments without players
 
-  recentTournaments = recentTournaments.filter(
+  toBeUpdated = toBeUpdated.filter(
     (tournament) => tournament.results.length == 0
   );
 
-  let results = new Array(recentTournaments.length);
+  let results = new Array(toBeUpdated.length);
 
   // I use a for loop to avoid response.status = 429
-  for (let i = 0; i < recentTournaments.length; i++) {
-    results[i] = await getResultsSwiss(recentTournaments[i]._id);
+  for (let i = 0; i < toBeUpdated.length; i++) {
+    results[i] = await getResultsSwiss(toBeUpdated[i]._id);
   }
 
-  let newDocs = recentTournaments.map(async (tournament, index) => {
+  let newDocs = toBeUpdated.map(async (tournament, index) => {
     let doc = await Tournament.findByIdAndUpdate(
       tournament._id,
       {
         results: results[index],
+        resultsUpdate: true,
+        playerUpdate: false,
       },
-      { new: true }
+      { new: true, overwriteDiscriminatorKey: true }
     );
     return doc;
   });

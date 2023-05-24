@@ -27,6 +27,8 @@ const tournament = new Schema({
   },
   rated: Boolean,
   results: Array,
+  resultsUpdate: Boolean,
+  playerUpdate: Boolean,
 });
 
 const Tournament = mongoose.model("Tournament", tournament);

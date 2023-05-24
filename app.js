@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { tournamentUpdate } = require("./DatabaseUpdate/tournamentUpdate");
 const { resultsUpdate } = require("./DatabaseUpdate/resultsUpdate");
+const { playerUpdate } = require("./DatabaseUpdate/playerUpdate");
 
 require("dotenv").config();
 
@@ -18,5 +19,5 @@ db.once("open", function () {
   console.log("Connected to MongoDB!");
 
   //Database Update
-  tournamentUpdate().then(resultsUpdate).then(console.log);
+  tournamentUpdate().then(resultsUpdate).then(playerUpdate).then(console.log);
 });

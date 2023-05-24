@@ -6,6 +6,8 @@ const { Tournament } = require("../Schemas/Tournament");
 const { options } = require("../options");
 
 async function tournamentUpdate() {
+  //Get last tournaments
+
   let data = await getSwissTournaments(
     options.teamName,
     options.tournamentsToCheck
@@ -16,32 +18,17 @@ async function tournamentUpdate() {
   data = data
     .filter((element) => element.status == "finished")
     .map((element) => {
-      let newObj = { ...element, _id: element.id };
+      let newObj = { ...element, _id: element.id, resultsUpdate: false };
       delete newObj.id;
       return newObj;
     });
 
-  //Find new tournaments
-
-  let promises = data.map(async (element) => {
-    const doc = await Tournament.findById(element._id);
-
-    if (!doc) {
-      //ID not found
-      return element;
-    } else {
-      return null;
-    }
-  });
-
-  let newTournaments = (await Promise.all(promises)).filter(
-    (element) => element != null
-  );
-
-  //Add new tournaments to database
-
-  promises = newTournaments.map(async (element) => {
-    const doc = await new Tournament(element).save();
+  promises = data.map(async (element) => {
+    const doc = await Tournament.findByIdAndUpdate(
+      element._id,
+      { ...element },
+      { upsert: true, new: true }
+    );
     return doc;
   });
 
