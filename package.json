@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "moment": "^2.29.4",
     "mongoose": "^7.1.1"
   },
   "scripts": {
