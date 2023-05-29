@@ -6,26 +6,38 @@ const { statsUpdate } = require("./DatabaseUpdate/statsUpdate");
 
 require("dotenv").config();
 
-//Connect to MongoDB
-
-mongoose.connect(process.env.MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log("Connected to MongoDB!");
-
-  //Database Update
-  tournamentUpdate()
-    .then(resultsUpdate)
-    .then(playerUpdate)
-    .then(statsUpdate)
-    .then(async () => {
-      await mongoose.disconnect();
-      console.log("Disconnected from MongoDB!");
+async function main() {
+  try {
+    //Mongo connection error handler
+    mongoose.connection.on("error", (error) => {
+      console.error("MongoDB connection error:", error);
     });
-});
+
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB!");
+
+    // Database Update
+    await tournamentUpdate();
+    await resultsUpdate();
+    await playerUpdate();
+    await statsUpdate();
+
+    // Disconnect from MongoDB
+    await mongoose.disconnect();
+    console.log("Disconnected from MongoDB!");
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+// Execute the main function immediately
+main();
+
+// Schedule the main function to run every 30 minutes
+setInterval(() => {
+  main();
+}, 1000 * 60 * 30);
