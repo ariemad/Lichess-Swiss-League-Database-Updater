@@ -3,6 +3,7 @@ const { tournamentUpdate } = require("./DatabaseUpdate/tournamentUpdate");
 const { resultsUpdate } = require("./DatabaseUpdate/resultsUpdate");
 const { playerUpdate } = require("./DatabaseUpdate/playerUpdate");
 const { statsUpdate } = require("./DatabaseUpdate/statsUpdate");
+const { metaUpdate } = require("./DatabaseUpdate/metaUpdate");
 
 require("dotenv").config();
 
@@ -25,6 +26,7 @@ async function main() {
     await resultsUpdate();
     await playerUpdate();
     await statsUpdate();
+    await metaUpdate();
 
     // Disconnect from MongoDB
     await mongoose.disconnect();

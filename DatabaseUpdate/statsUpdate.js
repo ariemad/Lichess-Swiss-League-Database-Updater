@@ -1,4 +1,4 @@
-const { getStartOfWeek, getStartOfMonth } = require("../Helper/getStartOfWeek");
+const { getStartOfWeek, getStartOfMonth } = require("../utils/getStartOfWeek");
 const { Player } = require("../Schemas/Player");
 const { Tournament } = require("../Schemas/Tournament");
 
