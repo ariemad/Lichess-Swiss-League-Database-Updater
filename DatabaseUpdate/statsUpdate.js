@@ -23,7 +23,12 @@ function calculateStats(tournaments, playerID) {
     }
   }
 
-  let avgRank = Math.round((rankSum / (participation || 1)) * 10) / 10;
+  let avgRank;
+  if (rankSum == 0) {
+    avgRank = 9999;
+  } else {
+    avgRank = Math.round((rankSum / participation) * 10) / 10;
+  }
   let avgPerformance =
     Math.round((performanceSum / (participation || 1)) * 10) / 10;
 
