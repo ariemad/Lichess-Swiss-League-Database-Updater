@@ -68,7 +68,7 @@ async function playerStatsUpdate(player) {
 
   //Save to database
 
-  player.save();
+  await player.save();
 }
 async function statsUpdate() {
   //Find players that stats are not updated
