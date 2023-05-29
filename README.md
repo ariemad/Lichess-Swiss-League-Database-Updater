@@ -12,6 +12,8 @@ git clone https://github.com/ariemad/lichess-swiss-league-database-updater.git
 
 cd lichess-swiss-league-database-updater
 
+echo "MONGODB_URL = '[Your Key]'" > .env
+
 npm install
 
 ```
@@ -20,7 +22,7 @@ npm install
 
 ```
 
-node app.js
+npm run start
 
 ```
 
