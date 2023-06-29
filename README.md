@@ -1,7 +1,19 @@
-# Lichess-Swiss-League-Database-Updater
+# Swiss League Database Updater
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+<p align="center">
+    <a href="https://swissleague.org/">
+        <img src="https://raw.githubusercontent.com/ariemad/lichess-swiss-league-website/main/assets/LogoLichess.png"
+            height="130">
+    </a>
+</p>
 
+<p align="center">
+    <a href="https://github.com/RichardLitt/standard-readme" alt="Contributors">
+        <img src="https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square" /></a>
+    <a href="https://discord.gg/tJPSGQG3">
+        <img src="https://img.shields.io/discord/1115282892424220754?logo=discord"
+            alt="chat on Discord"></a>
+</p>
 Script for automatic update of the Swiss League Database
 
 ## Install
